@@ -1,5 +1,5 @@
-﻿using SuaveControls.MaterialForms;
-using SuaveControls.MaterialForms.iOS.Renderers;
+﻿using Central.MaterialControls;
+using Central.MaterialControls.iOS.Renderers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(BorderlessDatePicker), typeof(BorderlessDatePickerRenderer))]
-namespace SuaveControls.MaterialForms.iOS.Renderers
+namespace Central.MaterialControls.iOS.Renderers
 {
     public class BorderlessDatePickerRenderer : DatePickerRenderer
     {

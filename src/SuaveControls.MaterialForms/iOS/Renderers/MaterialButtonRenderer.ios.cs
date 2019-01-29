@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using CoreGraphics;
-using SuaveControls.MaterialForms;
-using SuaveControls.MaterialForms.iOS.Renderers;
+using Central.MaterialControls;
+using Central.MaterialControls.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(MaterialButton), typeof(MaterialButtonRenderer))]
-namespace SuaveControls.MaterialForms.iOS.Renderers
+namespace Central.MaterialControls.iOS.Renderers
 {
 
     public class MaterialButtonRenderer : ButtonRenderer

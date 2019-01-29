@@ -9,9 +9,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using SuaveControls.MaterialForms.Android.Renderers;
+using Central.MaterialControls.Android.Renderers;
 
-namespace SuaveControls.MaterialForms.Android
+namespace Central.MaterialControls.Android
 {
     public static class RendererInitializer
     {

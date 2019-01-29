@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace SuaveControls.MaterialForms
+namespace Central.MaterialControls
 {
     /// <summary>
     /// Material button. Allows for the update of elevation of the control.

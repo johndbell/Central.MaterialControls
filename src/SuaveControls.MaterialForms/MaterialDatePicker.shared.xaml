@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:views="clr-namespace:SuaveControls.MaterialForms"
-             x:Class="SuaveControls.MaterialForms.MaterialDatePicker">
+             xmlns:views="clr-namespace:Central.MaterialControls"
+             x:Class="Central.MaterialControls.MaterialDatePicker">
     <ContentView.Content>
         <Grid ColumnSpacing="16">
             <Grid.RowDefinitions>

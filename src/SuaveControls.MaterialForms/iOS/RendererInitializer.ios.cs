@@ -1,9 +1,9 @@
-﻿using SuaveControls.MaterialForms.iOS.Renderers;
+﻿using Central.MaterialControls.iOS.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SuaveControls.MaterialForms.iOS
+namespace Central.MaterialControls.iOS
 {
     public class RendererInitializer
     {

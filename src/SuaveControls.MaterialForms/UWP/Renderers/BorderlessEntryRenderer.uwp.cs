@@ -1,5 +1,5 @@
-﻿using SuaveControls.MaterialForms;
-using SuaveControls.MaterialForms.UWP.Renderers;
+﻿using Central.MaterialControls;
+using Central.MaterialControls.UWP.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(BorderlessEntry), typeof(BorderlessEntryRenderer))]
 
-namespace SuaveControls.MaterialForms.UWP.Renderers
+namespace Central.MaterialControls.UWP.Renderers
 {
     public class BorderlessEntryRenderer : EntryRenderer
     {

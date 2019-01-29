@@ -1,11 +1,11 @@
-﻿using SuaveControls.MaterialForms.UWP.Renderers;
+﻿using Central.MaterialControls.UWP.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SuaveControls.MaterialForms.UWP
+namespace Central.MaterialControls.UWP
 {
     public class RendererInitializer
     {

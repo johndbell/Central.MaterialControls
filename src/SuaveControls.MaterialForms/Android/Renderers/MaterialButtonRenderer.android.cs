@@ -2,14 +2,14 @@
 using System.ComponentModel;
 using Android.Graphics;
 using Android.Support.V4.View;
-using SuaveControls.MaterialForms;
-using SuaveControls.MaterialForms.Android.Renderers;
+using Central.MaterialControls;
+using Central.MaterialControls.Android.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Animation = Android.Animation;
 
 [assembly: ExportRenderer(typeof(MaterialButton), typeof(MaterialButtonRenderer))]
-namespace SuaveControls.MaterialForms.Android.Renderers
+namespace Central.MaterialControls.Android.Renderers
 {
     public class MaterialButtonRenderer : Xamarin.Forms.Platform.Android.AppCompat.ButtonRenderer
     {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SuaveControls.MaterialForms
+namespace Central.MaterialControls
 {
     public partial class MaterialDatePicker : ContentView
     {

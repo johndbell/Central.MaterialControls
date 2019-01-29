@@ -11,12 +11,12 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
-using SuaveControls.MaterialForms;
-using SuaveControls.MaterialForms.Android.Renderers;
+using Central.MaterialControls;
+using Central.MaterialControls.Android.Renderers;
 using TimePicker = Xamarin.Forms.TimePicker;
 
 [assembly: ExportRenderer(typeof(BorderlessTimePicker), typeof(BorderlessTimePickerRenderer))]
-namespace SuaveControls.MaterialForms.Android.Renderers
+namespace Central.MaterialControls.Android.Renderers
 {
     public class BorderlessTimePickerRenderer : TimePickerRenderer
     {

@@ -11,15 +11,20 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
-using SuaveControls.MaterialForms;
-using SuaveControls.MaterialForms.Android.Renderers;
+using Central.MaterialControls;
+using Central.MaterialControls.Android.Renderers;
 using DatePicker = Xamarin.Forms.DatePicker;
 
 [assembly: ExportRenderer(typeof(BorderlessDatePicker), typeof(BorderlessDatePickerRenderer))]
-namespace SuaveControls.MaterialForms.Android.Renderers
+namespace Central.MaterialControls.Android.Renderers
 {
     public class BorderlessDatePickerRenderer : DatePickerRenderer
     {
+        public BorderlessDatePickerRenderer(Context context) : base(context)
+        {
+
+        }
+
         public static void Init() { }
         protected override void OnElementChanged(ElementChangedEventArgs<DatePicker> e)
         {

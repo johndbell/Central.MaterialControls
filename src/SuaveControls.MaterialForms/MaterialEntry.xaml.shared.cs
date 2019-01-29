@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SuaveControls.MaterialForms
+namespace Central.MaterialControls
 {
     public partial class MaterialEntry : ContentView
     {
@@ -260,6 +261,24 @@ namespace SuaveControls.MaterialForms
             };
 
             UpdateValidation();
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            switch (propertyName)
+            {
+                case nameof(IsValid):
+                    if (IsFocused)
+                    {
+                        Task.Run(async ()=> await CalculateLayoutFocused());
+                    }
+                    else
+                    {
+                        Task.Run(async ()=> await CalculateLayoutUnfocused());
+                    }
+                    break;
+            }
         }
 
         /// <summary>

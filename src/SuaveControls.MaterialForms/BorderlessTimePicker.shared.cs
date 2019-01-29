@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace SuaveControls.MaterialForms
+namespace Central.MaterialControls
 {
     public class BorderlessTimePicker : TimePicker
     {

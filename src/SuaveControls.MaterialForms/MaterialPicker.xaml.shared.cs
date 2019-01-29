@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace SuaveControls.MaterialForms
+namespace Central.MaterialControls
 {
     public partial class MaterialPicker : ContentView
     {
