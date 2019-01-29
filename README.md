@@ -1,7 +1,9 @@
-# SuaveControls.MaterialFormControls
+# Central.MaterialControls
 Some Xamarin.Forms input fields built to Material Design Standards
 
 This project is still a work in progress and bound to see updates.
+
+Forked from [SuaveControls.MaterialFormsControls](https://github.com/SuavePirate/SuaveControls.MaterialFormControls) on 29th January 2019
 
 ## Installation
 [![NuGet version](https://badge.fury.io/nu/MaterialFormControls.svg)](https://badge.fury.io/nu/MaterialFormControls)
