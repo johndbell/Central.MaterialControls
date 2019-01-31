@@ -52,51 +52,51 @@ namespace Central.MaterialControls
             var matEntry = (MaterialEntryBase)bindable;
             matEntry.UpdateColors();
         });
-        public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialEntry), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
+        public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialEntryBase), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._EntryField.Placeholder = (string)newval;
             matEntry._HiddenLabel.Text = (string)newval;
         });
-        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialEntry), defaultBindingMode: BindingMode.TwoWay);
+        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialEntryBase), defaultBindingMode: BindingMode.TwoWay);
 
 
-        public static BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(MaterialEntry), defaultValue: false, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(MaterialEntryBase), defaultValue: false, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._EntryField.IsPassword = (bool)newVal;
         });
-        public static BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(MaterialEntry), defaultValue: Keyboard.Default, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(MaterialEntryBase), defaultValue: Keyboard.Default, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._EntryField.Keyboard = (Keyboard)newVal;
         });
 
-        public static BindableProperty PlaceholderColorProperty = BindableProperty.Create(nameof(PlaceholderColorProperty), typeof(Color), typeof(MaterialEntry), Color.Gray, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty PlaceholderColorProperty = BindableProperty.Create(nameof(PlaceholderColorProperty), typeof(Color), typeof(MaterialEntryBase), Color.Gray, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._EntryField.PlaceholderColor = (Color)newVal;
         });
-        public static BindableProperty TextBackgroundColorProperty = BindableProperty.Create(nameof(TextBackgroundColorProperty), typeof(Color), typeof(MaterialEntry), Color.Transparent, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty TextBackgroundColorProperty = BindableProperty.Create(nameof(TextBackgroundColorProperty), typeof(Color), typeof(MaterialEntryBase), Color.Transparent, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._EntryField.BackgroundColor = (Color)newVal;
         });
-        public static BindableProperty TextColorProperty = BindableProperty.Create(nameof(DefaultColor), typeof(Color), typeof(MaterialEntry), Color.Black, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty TextColorProperty = BindableProperty.Create(nameof(DefaultColor), typeof(Color), typeof(MaterialEntryBase), Color.Black, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._EntryField.TextColor = (Color)newVal;
         });
 
-        public static BindableProperty HiddenLabelTextSizeProperty = BindableProperty.Create(nameof(HiddenLabelTextSizeProperty), typeof(double), typeof(MaterialEntry), 10.0, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty HiddenLabelTextSizeProperty = BindableProperty.Create(nameof(HiddenLabelTextSizeProperty), typeof(double), typeof(MaterialEntryBase), 10.0, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry._HiddenLabel.FontSize = (double)newVal;
         });
 
-        public static BindableProperty CompletedProperty = BindableProperty.Create(nameof(Completed), typeof(EventHandler), typeof(MaterialEntry), propertyChanged: (bindable, oldValue, newValue) =>
+        public static BindableProperty CompletedProperty = BindableProperty.Create(nameof(Completed), typeof(EventHandler), typeof(MaterialEntryBase), propertyChanged: (bindable, oldValue, newValue) =>
         {
-            var matEntry = (MaterialEntry)bindable;
+            var matEntry = (MaterialEntryBase)bindable;
             matEntry.Completed = (EventHandler)newValue;
         });
 

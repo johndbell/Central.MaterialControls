@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<views:MaterialEntryBase xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:views="clr-namespace:Central.MaterialControls"
              x:Class="Central.MaterialControls.MaterialDatePicker"
@@ -22,7 +22,7 @@
             <!-- BackgroundBox is used for underline with border style -->
             <BoxView x:Name="BackgroundBox" Grid.RowSpan="2" CornerRadius="5,5,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" IsVisible="false"/>
             
-            <views:BorderlessDatePicker Opacity="0" x:Name="Picker" Margin="10,0,0,0"/>
+            <views:BorderlessDatePicker Opacity="0" x:Name="Picker" Margin="10,0,10,0"/>
             <Label x:Name="HiddenLabel" HorizontalOptions="Start" VerticalOptions="Start" FontSize="10" IsVisible="False" Margin="10,0,0,0" />
             <views:BorderlessEntry x:Name="EntryField" Margin="10,0,10,0" Text="{Binding Text, Mode=TwoWay}" VerticalOptions="Center" Grid.RowSpan="2" />
             <BoxView x:Name="BottomBorder" Grid.Row="1" HeightRequest="1" Margin="0" HorizontalOptions="FillAndExpand" IsVisible="true" />
@@ -32,4 +32,4 @@
         </Grid>
 
     </ContentView.Content>
-</ContentView>
+</views:MaterialEntryBase>
