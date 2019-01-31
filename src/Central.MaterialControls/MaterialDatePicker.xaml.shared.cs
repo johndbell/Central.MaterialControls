@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,45 +10,75 @@ using Xamarin.Forms.Xaml;
 
 namespace Central.MaterialControls
 {
-    public partial class MaterialTimePicker : ContentView
+    public partial class MaterialDatePicker : ContentView
     {
 
-
-        public static BindableProperty TimeProperty = BindableProperty.Create(nameof(Time), typeof(TimeSpan?), typeof(MaterialTimePicker), defaultBindingMode: BindingMode.TwoWay);
-        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialTimePicker), defaultBindingMode: BindingMode.TwoWay);
-        public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialTimePicker), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
+        public static BindableProperty CustomDateFormatProperty = BindableProperty.Create(nameof(CustomDateFormat), typeof(string), typeof(MaterialDatePicker), defaultBindingMode: BindingMode.TwoWay);
+        public string CustomDateFormat
         {
-            var matEntry = (MaterialTimePicker)bindable;
+            get
+            {
+                return (string)GetValue(CustomDateFormatProperty);
+            }
+            set
+            {
+                SetValue(CustomDateFormatProperty, value);
+            }
+        }
+        private static string _defaultDateFormat = "dddd, MMMM d, yyyy";
+        public static BindableProperty DateProperty = BindableProperty.Create(nameof(Date), typeof(DateTime?), typeof(MaterialDatePicker), defaultBindingMode: BindingMode.TwoWay);
+        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialDatePicker), defaultBindingMode: BindingMode.TwoWay);
+        public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialDatePicker), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
+        {
+            var matEntry = (MaterialDatePicker)bindable;
             matEntry.EntryField.Placeholder = (string)newval;
             matEntry.HiddenLabel.Text = (string)newval;
         });
 
-        public static BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(MaterialTimePicker), defaultValue: false, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(MaterialDatePicker), defaultValue: false, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialTimePicker)bindable;
+            var matEntry = (MaterialDatePicker)bindable;
             matEntry.EntryField.IsPassword = (bool)newVal;
         });
-        public static BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(MaterialTimePicker), defaultValue: Keyboard.Default, propertyChanged: (bindable, oldVal, newVal) =>
+        public static BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(MaterialDatePicker), defaultValue: Keyboard.Default, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialTimePicker)bindable;
+            var matEntry = (MaterialDatePicker)bindable;
             matEntry.EntryField.Keyboard = (Keyboard)newVal;
         });
-        public static BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(MaterialTimePicker), defaultValue: Color.Accent);
+        public static BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(MaterialDatePicker), defaultValue: Color.Accent);
         public static BindableProperty InvalidColorProperty = BindableProperty.Create(nameof(InvalidColor), typeof(Color), typeof(MaterialEntry), Color.Red, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialTimePicker)bindable;
+            var matEntry = (MaterialDatePicker)bindable;
             matEntry.UpdateValidation();
         });
         public static BindableProperty DefaultColorProperty = BindableProperty.Create(nameof(DefaultColor), typeof(Color), typeof(MaterialEntry), Color.Gray, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialTimePicker)bindable;
+            var matEntry = (MaterialDatePicker)bindable;
             matEntry.UpdateValidation();
         });
         public static BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(MaterialEntry), true, propertyChanged: (bindable, oldVal, newVal) =>
         {
-            var matEntry = (MaterialTimePicker)bindable;
+            var matEntry = (MaterialDatePicker)bindable;
             matEntry.UpdateValidation();
         });
+        //public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(MaterialEntry), 5, propertyChanged: (bindable, oldValue, newValue) =>
+        //{
+        //    var matEntry = (MaterialDatePicker)bindable;
+        //    int value = (int)newValue;
+        //    matEntry.BackBox.CornerRadius = new CornerRadius(value, value, 0, 0);
+        //});
+
+        //public int CornerRadius
+        //{
+        //    get
+        //    {
+        //        return (int)GetValue(CornerRadiusProperty);
+        //    }
+        //    set
+        //    {
+        //        SetValue(CornerRadiusProperty, value);
+        //    }
+        //}
 
         public bool IsValid
         {
@@ -83,15 +114,15 @@ namespace Central.MaterialControls
             }
         }
 
-        public TimeSpan? Time
+        public DateTime? Date
         {
             get
             {
-                return (TimeSpan?)GetValue(TimeProperty);
+                return (DateTime?)GetValue(DateProperty);
             }
             set
             {
-                SetValue(TimeProperty, value);
+                SetValue(DateProperty, value);
             }
         }
         public Color AccentColor
@@ -151,17 +182,18 @@ namespace Central.MaterialControls
                 SetValue(PlaceholderProperty, value);
             }
         }
-        public MaterialTimePicker()
+        public MaterialDatePicker()
         {
             InitializeComponent();
             EntryField.BindingContext = this;
             BottomBorder.BackgroundColor = DefaultColor;
             EntryField.Focused += (s, a) =>
             {
-				Device.BeginInvokeOnMainThread(() => {
-					EntryField.Unfocus();
-					Picker.Focus();
-				});
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    EntryField.Unfocus();
+                    Picker.Focus();
+                });
             };
             Picker.Focused += async (s, a) =>
             {
@@ -185,8 +217,10 @@ namespace Central.MaterialControls
             };
             Picker.Unfocused += async (s, a) =>
             {
-                HiddenLabel.TextColor = DefaultColor;
-                if (Time == null)
+                if (IsValid)
+                    HiddenLabel.TextColor = DefaultColor;
+                Picker_DateSelected(s, new DateChangedEventArgs(Picker.Date, Picker.Date));
+                if (string.IsNullOrEmpty(EntryField.Text))
                 {
                     // animate both at the same time
                     await Task.WhenAll(
@@ -202,23 +236,16 @@ namespace Central.MaterialControls
                 }
             };
 
-            Picker.PropertyChanged += Picker_PropertyChanged; ;
+            Picker.DateSelected += Picker_DateSelected;
         }
 
-        private void Picker_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Picker_DateSelected(object sender, DateChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Picker.Time))
-            {
-                EntryField.Text = DateTime.Today.Add(Picker.Time).ToString("hh:mm tt");
-                Time = Picker.Time;
-            }
+            if (string.IsNullOrEmpty(CustomDateFormat))
+                CustomDateFormat = _defaultDateFormat;
+            EntryField.Text = e.NewDate.ToString(CustomDateFormat, CultureInfo.CurrentCulture);
+            Date = e.NewDate;
         }
-
-        public TimePicker GetUnderlyingPicker()
-        {
-            return Picker;
-        }
-
 
 
         /// <summary>
@@ -247,6 +274,5 @@ namespace Central.MaterialControls
                 HiddenLabel.TextColor = InvalidColor;
             }
         }
-
     }
 }

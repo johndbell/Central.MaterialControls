@@ -9,16 +9,17 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="1"/>
             </Grid.RowDefinitions>
+            <!--<BoxView x:Name="BackBox" CornerRadius="5,5,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" Grid.RowSpan="2"/>-->
             <views:BorderlessPicker
                 x:Name="Picker"
-                Margin="0,12,0,0"
+                Margin="10,12,0,0"
                 ItemsSource="{Binding Items}"
                 SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}" />
             <Label x:Name="HiddenLabel"
                 FontSize="10"
                 IsVisible="False"
-                Margin="0"
+                Margin="10,0,0,0"
                 VerticalOptions="Start" />
             <BoxView x:Name="BottomBorder" BackgroundColor="Gray" Grid.Row="1" HeightRequest="1" Margin="0" HorizontalOptions="FillAndExpand"/>
             <BoxView x:Name="HiddenBottomBorder" BackgroundColor="Gray" Grid.Row="1" HeightRequest="1" Margin="0" WidthRequest="0" HorizontalOptions="Center"/>

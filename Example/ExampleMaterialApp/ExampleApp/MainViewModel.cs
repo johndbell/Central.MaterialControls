@@ -26,6 +26,60 @@ namespace ExampleMaterialApp
             }
         }
 
+
+            private bool _showTitle = true;
+        public bool ShowTitle
+        {
+            get => _showTitle;
+            set
+            {
+                _showTitle = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowTitle)));
+            }
+        }
+
+        private bool _underlineOnly = true;
+        public bool UnderlineOnly
+        {
+            get => _underlineOnly;
+            set
+            {
+                _underlineOnly = value;
+                _outline = _underlineWithBackground = !UnderlineOnly;
+                UpdateProps();
+            }
+        }
+        private bool _underlineWithBackground = false;
+        public bool UnderlineWithBackground
+        {
+            get => _underlineWithBackground;
+            set
+            {
+                _underlineWithBackground = value;
+                _underlineOnly = _outline = !UnderlineWithBackground;
+                UpdateProps();
+            }
+        }
+        private bool _outline = false;
+        public bool OutlineOnly
+        {
+            get => _outline;
+            set
+            {
+                _outline = value;
+                _underlineOnly = _underlineWithBackground = !OutlineOnly;
+                UpdateProps();
+            }
+        }
+
+        private void UpdateProps()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UnderlineOnly)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(UnderlineWithBackground)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(OutlineOnly)));
+        }
+    
+
         public MainViewModel()
         {
             PickerData = new ObservableCollection<Fruit>

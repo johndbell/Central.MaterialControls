@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ExampleMaterialApp"
+             xmlns:material="clr-namespace:Central.MaterialControls;assembly=Central.MaterialControls"
+             x:Class="ExampleMaterialApp.MainPage"
+             BackgroundColor="White">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="material:MaterialEntry">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="BorderStyle" Value="Underline"/>
+            <Setter Property="UnderlineWithBackgroundColor" Value="LightGray"/>
+            <Setter Property="ShowTitle" Value="{Binding ShowTitle}"/>
+            <Style.Triggers>
+                <DataTrigger TargetType="material:MaterialEntry" Binding="{Binding OutlineOnly}" Value="true">
+                    <Setter Property="BorderStyle" Value="Outline"/>
+                </DataTrigger>
+                <DataTrigger TargetType="material:MaterialEntry" Binding="{Binding UnderlineOnly}" Value="true">
+                    <Setter Property="BorderStyle" Value="Underline"/>
+                </DataTrigger>
+                <DataTrigger TargetType="material:MaterialEntry" Binding="{Binding UnderlineWithBackground}" Value="true">
+                    <Setter Property="BorderStyle" Value="UnderlineWithBackground"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Spacing="16" Margin="16">
+            <Label Text="Material Forms!" Margin="32" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            <material:MaterialEntry Placeholder="Email" Keyboard="Email" AccentColor="Green" IsValid="{Binding IsValid}"/>
+            <material:MaterialEntry Placeholder="Regular Text" AccentColor="Orange" IsValid="{Binding IsValid}"/>
+            <material:MaterialEntry Placeholder="Number" Keyboard="Numeric" AccentColor="Red" IsValid="{Binding IsValid}"/>
+            <material:MaterialEntry IsPassword="True" Placeholder="Password" AccentColor="Blue" IsValid="{Binding IsValid}" InvalidColor="Lime"/>
+            <material:MaterialEntry Placeholder="Updated Default Color" DefaultColor="Aqua" AccentColor="Fuchsia"/>
+            <material:MaterialDatePicker Placeholder="Date Picker" AccentColor="BlueViolet" IsValid="{Binding IsValid}"/>
+            <material:MaterialTimePicker Placeholder="Time Picker" AccentColor="HotPink" IsValid="{Binding IsValid}"/>
+            <material:MaterialPicker 
+                Placeholder="Picker"
+                AccentColor="Maroon"
+                Items="{Binding PickerData}"
+                SelectedItem="{Binding PickerSelectedItem}"
+                SelectedIndexChangedCommand="{Binding PickerSelectedIndexChangedCmd}" 
+                IsValid="{Binding IsValid}"/>
+            <Button Text="Switch IsValid" Command="{Binding SwitchValidCommand}"/>
+            <material:MaterialButton x:Name="MyButton" 
+                                  BackgroundColor="#03A9F4" 
+                                  TextColor="White" 
+                                  Text="Click to raise elevation" 
+                                  Elevation="1" 
+                                  VerticalOptions="Center" 
+                                  HorizontalOptions="Center"
+                                  WidthRequest="300"
+                                  BorderRadius="0"
+                                  Clicked="MyButton_Clicked"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="ShowTitle" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding ShowTitle, Mode=TwoWay}" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Underline" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding UnderlineOnly, Mode=TwoWay}" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Underline with Background" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding UnderlineWithBackground, Mode=TwoWay}" VerticalOptions="Center"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Outline" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding OutlineOnly, Mode=TwoWay}" VerticalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

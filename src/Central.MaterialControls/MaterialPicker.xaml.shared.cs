@@ -44,6 +44,24 @@ namespace Central.MaterialControls
             var matEntry = (MaterialPicker)bindable;
             matEntry.UpdateValidation();
         });
+        //public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(MaterialEntry), 5, propertyChanged: (bindable, oldValue, newValue) =>
+        //{
+        //    var matEntry = (MaterialPicker)bindable;
+        //    int value = (int)newValue;
+        //    matEntry.BackBox.CornerRadius = new CornerRadius(value, value, 0, 0);
+        //});
+
+        //public int CornerRadius
+        //{
+        //    get
+        //    {
+        //        return (int)GetValue(CornerRadiusProperty);
+        //    }
+        //    set
+        //    {
+        //        SetValue(CornerRadiusProperty, value);
+        //    }
+        //}
 
         public bool IsValid
         {

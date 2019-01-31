@@ -95,7 +95,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -119,42 +118,22 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
-    <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Platform.iOS, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Platform.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Forms.Xaml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.Forms.2.3.4.247\lib\Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\SuaveControls.MaterialForms.iOS\SuaveControls.MaterialForms.iOS.csproj">
-      <Project>{a9a6301a-0bd0-46a4-9aa7-e96491fa3965}</Project>
-      <Name>SuaveControls.MaterialForms.iOS</Name>
-      <IsAppExtension>false</IsAppExtension>
-      <IsWatchApp>false</IsWatchApp>
+    <ProjectReference Include="..\..\..\src\Central.MaterialControls\Central.MaterialControls.csproj">
+      <Project>{03e000da-c02b-41c2-96f6-f3171553b79a}</Project>
+      <Name>Central.MaterialControls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\src\SuaveControls.MaterialForms\SuaveControls.MaterialForms.csproj">
-      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
-      <Name>SuaveControls.MaterialForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExampleMaterialApp\ExampleMaterialApp.csproj">
-      <Project>{a338e9c0-5d68-48b5-8fc4-7880e6546240}</Project>
-      <Name>ExampleMaterialApp</Name>
+    <ProjectReference Include="..\ExampleApp\ExampleApp.csproj">
+      <Project>{cd6a3ec2-04fe-4231-98f6-5ed09350c9c1}</Project>
+      <Name>ExampleApp</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms">
+      <Version>3.4.0.1009999</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets'))" />
-  </Target>
 </Project>

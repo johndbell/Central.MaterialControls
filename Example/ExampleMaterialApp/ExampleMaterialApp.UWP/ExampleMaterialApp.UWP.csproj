@@ -151,20 +151,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\SuaveControls.MaterialForms.UWP\SuaveControls.MaterialForms.UWP.csproj">
-      <Project>{c69e86ab-83ff-40ae-871e-cff452aa426f}</Project>
-      <Name>SuaveControls.MaterialForms.UWP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\src\SuaveControls.MaterialForms\SuaveControls.MaterialForms.csproj">
-      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
-      <Name>SuaveControls.MaterialForms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExampleMaterialApp\ExampleMaterialApp.csproj">
-      <Project>{a338e9c0-5d68-48b5-8fc4-7880e6546240}</Project>
-      <Name>ExampleMaterialApp</Name>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
