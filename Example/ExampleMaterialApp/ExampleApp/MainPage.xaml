@@ -11,6 +11,23 @@
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
+        <Style TargetType="material:MaterialPicker">
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="BorderStyle" Value="Underline"/>
+            <Setter Property="UnderlineWithBackgroundColor" Value="#EEE"/>
+            <Setter Property="ShowTitle" Value="{Binding ShowTitle}"/>
+            <Style.Triggers>
+                <DataTrigger TargetType="material:MaterialPicker" Binding="{Binding OutlineOnly}" Value="true">
+                    <Setter Property="BorderStyle" Value="Outline"/>
+                </DataTrigger>
+                <DataTrigger TargetType="material:MaterialPicker" Binding="{Binding UnderlineOnly}" Value="true">
+                    <Setter Property="BorderStyle" Value="Underline"/>
+                </DataTrigger>
+                <DataTrigger TargetType="material:MaterialPicker" Binding="{Binding UnderlineWithBackground}" Value="true">
+                    <Setter Property="BorderStyle" Value="UnderlineWithBackground"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <Style TargetType="material:MaterialDatePicker">
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="BorderStyle" Value="Underline"/>

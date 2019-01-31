@@ -6,96 +6,26 @@ using Xamarin.Forms;
 
 namespace Central.MaterialControls
 {
-    public partial class MaterialPicker : ContentView
+    public partial class MaterialPicker : MaterialEntryBase
     {
         public event EventHandler SelectedIndexChanged;
 
-
-        public Picker GetUnderlyingPicker() => Picker;
-
-        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialPicker), defaultBindingMode: BindingMode.TwoWay);
-        public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialPicker), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
+        public override void OnPlaceholderChanged(string placeholder)
         {
-            var matPicker = (MaterialPicker)bindable;
-            matPicker.Picker.Title = (string)newval;
-            matPicker.HiddenLabel.Text = (string)newval;
-        });
+            base.OnPlaceholderChanged(placeholder);
+            Picker.Title = placeholder;
+        }
+
         public static BindableProperty ItemsProperty = BindableProperty.Create(nameof(Items), typeof(IList), typeof(MaterialPicker), null);
         public static BindableProperty SelectedIndexProperty = BindableProperty.Create(nameof(SelectedIndex), typeof(int), typeof(MaterialPicker), 0, BindingMode.TwoWay);
-        public static BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(MaterialPicker), defaultValue: Color.Accent);
+        
         public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(MaterialPicker), null, BindingMode.TwoWay, propertyChanged: (bindable, oldValue, newValue) =>
         {
             var matPicker = (MaterialPicker)bindable;
             matPicker.HiddenLabel.IsVisible = !string.IsNullOrEmpty(newValue?.ToString());
         });
         public static BindableProperty SelectedIndexChangedCommandProperty = BindableProperty.Create(nameof(SelectedIndexChangedCommand), typeof(ICommand), typeof(MaterialPicker), null);
-        public static BindableProperty InvalidColorProperty = BindableProperty.Create(nameof(InvalidColor), typeof(Color), typeof(MaterialEntry), Color.Red, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialPicker)bindable;
-            matEntry.UpdateValidation();
-        });
-        public static BindableProperty DefaultColorProperty = BindableProperty.Create(nameof(DefaultColor), typeof(Color), typeof(MaterialEntry), Color.Gray, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialPicker)bindable;
-            matEntry.UpdateValidation();
-        });
-        public static BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(MaterialEntry), true, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialPicker)bindable;
-            matEntry.UpdateValidation();
-        });
-        //public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(MaterialEntry), 5, propertyChanged: (bindable, oldValue, newValue) =>
-        //{
-        //    var matEntry = (MaterialPicker)bindable;
-        //    int value = (int)newValue;
-        //    matEntry.BackBox.CornerRadius = new CornerRadius(value, value, 0, 0);
-        //});
 
-        //public int CornerRadius
-        //{
-        //    get
-        //    {
-        //        return (int)GetValue(CornerRadiusProperty);
-        //    }
-        //    set
-        //    {
-        //        SetValue(CornerRadiusProperty, value);
-        //    }
-        //}
-
-        public bool IsValid
-        {
-            get
-            {
-                return (bool)GetValue(IsValidProperty);
-            }
-            set
-            {
-                SetValue(IsValidProperty, value);
-            }
-        }
-        public Color DefaultColor
-        {
-            get
-            {
-                return (Color)GetValue(DefaultColorProperty);
-            }
-            set
-            {
-                SetValue(DefaultColorProperty, value);
-            }
-        }
-        public Color InvalidColor
-        {
-            get
-            {
-                return (Color)GetValue(InvalidColorProperty);
-            }
-            set
-            {
-                SetValue(InvalidColorProperty, value);
-            }
-        }
         public ICommand SelectedIndexChangedCommand
         {
             get { return (ICommand)GetValue(SelectedIndexChangedCommandProperty); }
@@ -132,47 +62,12 @@ namespace Central.MaterialControls
             }
         }
 
-        public Color AccentColor
-        {
-            get
-            {
-                return (Color)GetValue(AccentColorProperty);
-            }
-            set
-            {
-                SetValue(AccentColorProperty, value);
-            }
-        }
-
-        public string Text
-        {
-            get
-            {
-                return (string)GetValue(TextProperty);
-            }
-            set
-            {
-                SetValue(TextProperty, value);
-            }
-        }
-
-        public string Placeholder
-        {
-            get
-            {
-                return (string)GetValue(PlaceholderProperty);
-            }
-            set
-            {
-                SetValue(PlaceholderProperty, value);
-            }
-        }
-
         public MaterialPicker()
         {
             InitializeComponent();
+            base.InitialiseBase();
             Picker.BindingContext = this;
-            BottomBorder.BackgroundColor = DefaultColor;
+            //BottomBorder.BackgroundColor = DefaultColor;
             // TODO: Possible memory leak?
             Picker.SelectedIndexChanged += (sender, e) =>
             {
@@ -182,72 +77,16 @@ namespace Central.MaterialControls
 
             Picker.Focused += async (s, a) =>
             {
-                HiddenBottomBorder.BackgroundColor = AccentColor;
-                HiddenLabel.TextColor = AccentColor;
-                HiddenLabel.IsVisible = true;
-                if (Picker.SelectedItem == null)
-                {
-                    // animate both at the same time
-                    await Task.WhenAll(
-                    HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, BottomBorder.Width, BottomBorder.Height), 200),
-                    HiddenLabel.FadeTo(1, 60),
-                    HiddenLabel.TranslateTo(HiddenLabel.TranslationX, Picker.Y - Picker.Height + 4, 200, Easing.BounceIn)
-                 );
-                    Picker.Title = null;
-                }
-                else
-                {
-                    await HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, BottomBorder.Width, BottomBorder.Height), 200);
-                }
+                await base.CalculateLayoutFocused();
             };
             Picker.Unfocused += async (s, a) =>
             {
-                HiddenLabel.TextColor = DefaultColor;
-                if (Picker.SelectedItem == null)
-                {
-                    // animate both at the same time
-                    await Task.WhenAll(
-                    HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, 0, BottomBorder.Height), 200),
-                    HiddenLabel.FadeTo(0, 180),
-                    HiddenLabel.TranslateTo(HiddenLabel.TranslationX, Picker.Y, 200, Easing.BounceIn)
-                 );
-                    Picker.Title = Placeholder;
-                }
-                else
-                {
-                    await HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, 0, BottomBorder.Height), 200);
-                }
+                await base.CalculateLayoutUnfocused();
             };
 
         }
 
+        public override bool ValueIsNullOrEmpty { get => Picker.SelectedItem == null; }
 
-
-        /// <summary>
-        /// Updates view based on validation state
-        /// </summary>
-        private void UpdateValidation()
-        {
-            if (IsValid)
-            {
-
-                BottomBorder.BackgroundColor = DefaultColor;
-                HiddenBottomBorder.BackgroundColor = AccentColor;
-                if (IsFocused)
-                {
-                    HiddenLabel.TextColor = AccentColor;
-                }
-                else
-                {
-                    HiddenLabel.TextColor = DefaultColor;
-                }
-            }
-            else
-            {
-                BottomBorder.BackgroundColor = InvalidColor;
-                HiddenBottomBorder.BackgroundColor = InvalidColor;
-                HiddenLabel.TextColor = InvalidColor;
-            }
-        }
     }
 }

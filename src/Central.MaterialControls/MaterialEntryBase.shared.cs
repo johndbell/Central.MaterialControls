@@ -29,6 +29,8 @@ namespace Central.MaterialControls
         public BoxView _BottomBorder { get; private set; }
         public BoxView _HiddenBottomBorder { get; private set; }
 
+        public virtual bool ValueIsNullOrEmpty { get => string.IsNullOrEmpty(_EntryField.Text); }
+
         public static BindableProperty UnderlineWithBackgroundColorProperty = BindableProperty.Create(nameof(UnderlineWithBackgroundColor), typeof(Color), typeof(MaterialEntryBase), Color.FromHex("#EEEEEE"), propertyChanged: (bindable, oldValue, newValue) =>
         {    
         });
@@ -55,9 +57,15 @@ namespace Central.MaterialControls
         public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialEntryBase), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
         {
             var matEntry = (MaterialEntryBase)bindable;
-            matEntry._EntryField.Placeholder = (string)newval;
-            matEntry._HiddenLabel.Text = (string)newval;
+            matEntry.OnPlaceholderChanged((string)newval);
         });
+
+        public virtual void OnPlaceholderChanged(string placeholder)
+        {
+            _EntryField.Placeholder = placeholder;
+            _HiddenLabel.Text = placeholder;
+        }
+
         public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialEntryBase), defaultBindingMode: BindingMode.TwoWay);
 
 
@@ -383,7 +391,7 @@ namespace Central.MaterialControls
         /// <returns>The layout unfocused.</returns>
         protected async Task CalculateLayoutUnfocused()
         {
-            if (string.IsNullOrEmpty(_EntryField.Text))
+            if (ValueIsNullOrEmpty)
             {
                 if (ShowTitle)
                 {
@@ -433,7 +441,7 @@ namespace Central.MaterialControls
             _HiddenLabel.Opacity = 0;
             _HiddenLabel.IsVisible = ShowTitle;
 
-            if (string.IsNullOrEmpty(_EntryField.Text))
+            if (ValueIsNullOrEmpty)
             {
                 if (ShowTitle)
                 {
