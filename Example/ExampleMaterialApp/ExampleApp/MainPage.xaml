@@ -14,7 +14,7 @@
         <Style TargetType="material:MaterialEntry">
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="BorderStyle" Value="Underline"/>
-            <Setter Property="UnderlineWithBackgroundColor" Value="LightGray"/>
+            <Setter Property="UnderlineWithBackgroundColor" Value="#EEE "/>
             <Setter Property="ShowTitle" Value="{Binding ShowTitle}"/>
             <Style.Triggers>
                 <DataTrigger TargetType="material:MaterialEntry" Binding="{Binding OutlineOnly}" Value="true">
