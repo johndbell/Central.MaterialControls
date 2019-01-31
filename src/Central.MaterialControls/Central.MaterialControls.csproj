@@ -64,26 +64,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="MaterialDatePicker.shared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="MaterialEntry.shared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="MaterialPicker.shared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="MaterialTimePicker.shared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
 
