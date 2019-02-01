@@ -9,97 +9,11 @@ using Xamarin.Forms.Xaml;
 
 namespace Central.MaterialControls
 {
-    public partial class MaterialTimePicker : ContentView
+    public partial class MaterialTimePicker : MaterialEntryBase
     {
 
 
         public static BindableProperty TimeProperty = BindableProperty.Create(nameof(Time), typeof(TimeSpan?), typeof(MaterialTimePicker), defaultBindingMode: BindingMode.TwoWay);
-        public static BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialTimePicker), defaultBindingMode: BindingMode.TwoWay);
-        public static BindableProperty PlaceholderProperty = BindableProperty.Create(nameof(Placeholder), typeof(string), typeof(MaterialTimePicker), defaultBindingMode: BindingMode.TwoWay, propertyChanged: (bindable, oldVal, newval) =>
-        {
-            var matEntry = (MaterialTimePicker)bindable;
-            matEntry.EntryField.Placeholder = (string)newval;
-            matEntry.HiddenLabel.Text = (string)newval;
-        });
-
-        public static BindableProperty IsPasswordProperty = BindableProperty.Create(nameof(IsPassword), typeof(bool), typeof(MaterialTimePicker), defaultValue: false, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialTimePicker)bindable;
-            matEntry.EntryField.IsPassword = (bool)newVal;
-        });
-        public static BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(MaterialTimePicker), defaultValue: Keyboard.Default, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialTimePicker)bindable;
-            matEntry.EntryField.Keyboard = (Keyboard)newVal;
-        });
-        public static BindableProperty AccentColorProperty = BindableProperty.Create(nameof(AccentColor), typeof(Color), typeof(MaterialTimePicker), defaultValue: Color.Accent);
-        public static BindableProperty InvalidColorProperty = BindableProperty.Create(nameof(InvalidColor), typeof(Color), typeof(MaterialEntry), Color.Red, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialTimePicker)bindable;
-            matEntry.UpdateValidation();
-        });
-        public static BindableProperty DefaultColorProperty = BindableProperty.Create(nameof(DefaultColor), typeof(Color), typeof(MaterialEntry), Color.Gray, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialTimePicker)bindable;
-            matEntry.UpdateValidation();
-        });
-        public static BindableProperty IsValidProperty = BindableProperty.Create(nameof(IsValid), typeof(bool), typeof(MaterialEntry), true, propertyChanged: (bindable, oldVal, newVal) =>
-        {
-            var matEntry = (MaterialTimePicker)bindable;
-            matEntry.UpdateValidation();
-        });
-        //public static BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(int), typeof(MaterialEntry), 5, propertyChanged: (bindable, oldValue, newValue) =>
-        //{
-        //    var matEntry = (MaterialTimePicker)bindable;
-        //    int value = (int)newValue;
-        //    matEntry.BackBox.CornerRadius = new CornerRadius(value, value, 0, 0);
-        //});
-
-        //public int CornerRadius
-        //{
-        //    get
-        //    {
-        //        return (int)GetValue(CornerRadiusProperty);
-        //    }
-        //    set
-        //    {
-        //        SetValue(CornerRadiusProperty, value);
-        //    }
-        //}
-
-        public bool IsValid
-        {
-            get
-            {
-                return (bool)GetValue(IsValidProperty);
-            }
-            set
-            {
-                SetValue(IsValidProperty, value);
-            }
-        }
-        public Color DefaultColor
-        {
-            get
-            {
-                return (Color)GetValue(DefaultColorProperty);
-            }
-            set
-            {
-                SetValue(DefaultColorProperty, value);
-            }
-        }
-        public Color InvalidColor
-        {
-            get
-            {
-                return (Color)GetValue(InvalidColorProperty);
-            }
-            set
-            {
-                SetValue(InvalidColorProperty, value);
-            }
-        }
 
         public TimeSpan? Time
         {
@@ -112,68 +26,12 @@ namespace Central.MaterialControls
                 SetValue(TimeProperty, value);
             }
         }
-        public Color AccentColor
-        {
-            get
-            {
-                return (Color)GetValue(AccentColorProperty);
-            }
-            set
-            {
-                SetValue(AccentColorProperty, value);
-            }
-        }
-        public Keyboard Keyboard
-        {
-            get
-            {
-                return (Keyboard)GetValue(KeyboardProperty);
-            }
-            set
-            {
-                SetValue(KeyboardProperty, value);
-            }
-        }
 
-        public bool IsPassword
-        {
-            get
-            {
-                return (bool)GetValue(IsPasswordProperty);
-            }
-            set
-            {
-                SetValue(IsPasswordProperty, value);
-            }
-        }
-
-        public string Text
-        {
-            get
-            {
-                return (string)GetValue(TextProperty);
-            }
-            set
-            {
-                SetValue(TextProperty, value);
-            }
-        }
-        public string Placeholder
-        {
-            get
-            {
-                return (string)GetValue(PlaceholderProperty);
-            }
-            set
-            {
-                SetValue(PlaceholderProperty, value);
-            }
-        }
         public MaterialTimePicker()
         {
             InitializeComponent();
-            EntryField.BindingContext = this;
-            BottomBorder.BackgroundColor = DefaultColor;
+            base.InitialiseBase();
+            
             EntryField.Focused += (s, a) =>
             {
 				Device.BeginInvokeOnMainThread(() => {
@@ -183,41 +41,11 @@ namespace Central.MaterialControls
             };
             Picker.Focused += async (s, a) =>
             {
-                HiddenBottomBorder.BackgroundColor = AccentColor;
-                HiddenLabel.TextColor = AccentColor;
-                HiddenLabel.IsVisible = true;
-                if (string.IsNullOrEmpty(EntryField.Text))
-                {
-                    // animate both at the same time
-                    await Task.WhenAll(
-                    HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, BottomBorder.Width, BottomBorder.Height), 200),
-                    HiddenLabel.FadeTo(1, 60),
-                    HiddenLabel.TranslateTo(HiddenLabel.TranslationX, EntryField.Y - EntryField.Height + 4, 200, Easing.BounceIn)
-                 );
-                    EntryField.Placeholder = null;
-                }
-                else
-                {
-                    await HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, BottomBorder.Width, BottomBorder.Height), 200);
-                }
+                await CalculateLayoutFocused();
             };
             Picker.Unfocused += async (s, a) =>
             {
-                HiddenLabel.TextColor = DefaultColor;
-                if (Time == null)
-                {
-                    // animate both at the same time
-                    await Task.WhenAll(
-                    HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, 0, BottomBorder.Height), 200),
-                    HiddenLabel.FadeTo(0, 180),
-                    HiddenLabel.TranslateTo(HiddenLabel.TranslationX, EntryField.Y, 200, Easing.BounceIn)
-                 );
-                    EntryField.Placeholder = Placeholder;
-                }
-                else
-                {
-                    await HiddenBottomBorder.LayoutTo(new Rectangle(BottomBorder.X, BottomBorder.Y, 0, BottomBorder.Height), 200);
-                }
+                await CalculateLayoutUnfocused();
             };
 
             Picker.PropertyChanged += Picker_PropertyChanged; ;

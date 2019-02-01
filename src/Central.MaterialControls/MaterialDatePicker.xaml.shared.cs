@@ -49,21 +49,13 @@ namespace Central.MaterialControls
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    await base.CalculateLayoutFocused();
                     EntryField.Unfocus();
                     Picker.Focus();
                 });
             };
-            EntryField.Unfocused += (s, a) =>
+            Picker.Focused += async (s, a) =>
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await base.CalculateLayoutFocused();
-                });
-            };
-            Picker.Focused += (s, a) =>
-            {
-                //await base.CalculateLayoutFocused();
+                await base.CalculateLayoutFocused();
             };
             Picker.Unfocused += (s, a) =>
             {
